@@ -159,6 +159,15 @@ body.controls-hidden #primary-controls #hide {
   visibility: visible;
 }
 
+body.controls-hidden #primary-controls,
+body.controls-hidden #preset-controls {
+  pointer-events: none;
+}
+
+body.controls-hidden #primary-controls #hide {
+  pointer-events: auto;
+}
+
 /* Bomb mode */
 body.bomb-mode #timer {
   background: radial-gradient(ellipse at center, #222 0%, #050505 70%);
@@ -171,7 +180,7 @@ body.bomb-mode #timer {
 }
 
 body.bomb-mode #timer-text {
-  color: #ffd43b;
+  color: #fff;
   font-size: 20vmin;
 }
 
@@ -182,12 +191,12 @@ body:not(.bomb-mode) #explosion {
 
 #bomb-fuse {
   position: absolute;
-  top: -20px;
-  right: 12%;
+  top: 6%;
+  right: 14%;
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 160px;
+  width: 200px;
   height: 24px;
   pointer-events: none;
 }
@@ -195,7 +204,7 @@ body:not(.bomb-mode) #explosion {
 #bomb-fuse .fuse-line {
   flex: 1;
   height: 6px;
-  background: #3a2f1c;
+  background: linear-gradient(90deg, #c79a56 0%, #9f7b3b 50%, #6d5123 100%);
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -204,11 +213,13 @@ body:not(.bomb-mode) #explosion {
 #bomb-fuse .fuse-progress {
   position: absolute;
   top: 0;
-  left: 0;
+  left: auto;
+  right: 0;
   bottom: 0;
   width: var(--fuse-progress, 0%);
-  background: linear-gradient(90deg, #ffb703 0%, #ff6b35 60%, #d7263d 100%);
-  box-shadow: 0 0 8px rgba(255, 180, 0, 0.8);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(45, 32, 18, 0.9) 60%, rgba(12, 8, 4, 0.95) 100%);
+  box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.6);
+  transform-origin: right center;
 }
 
 #bomb-fuse .fuse-spark {
@@ -218,13 +229,13 @@ body:not(.bomb-mode) #explosion {
   background: radial-gradient(circle at 30% 30%, #fff9c4 0%, #ff9800 60%, #d84315 100%);
   box-shadow: 0 0 12px rgba(255, 196, 0, 0.8);
   animation: pulse 0.6s infinite ease-in-out;
-  transform: translateX(calc(var(--spark-position, 0%) - 14px));
+  transform: translateX(calc(var(--spark-position, 0%) - 7px));
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.9) translateX(calc(var(--spark-position, 0%) - 14px)); }
-  50% { transform: scale(1.1) translateX(calc(var(--spark-position, 0%) - 14px)); }
-  100% { transform: scale(0.9) translateX(calc(var(--spark-position, 0%) - 14px)); }
+  0% { transform: scale(0.9) translateX(calc(var(--spark-position, 0%) - 7px)); }
+  50% { transform: scale(1.1) translateX(calc(var(--spark-position, 0%) - 7px)); }
+  100% { transform: scale(0.9) translateX(calc(var(--spark-position, 0%) - 7px)); }
 }
 
 #explosion {

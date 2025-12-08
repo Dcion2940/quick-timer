@@ -43,7 +43,7 @@ var soundToggle = function(des, state) {
 
 var getThemeColor = function() {
   if (isBombMode) {
-    return '#ffd43b';
+    return '#fff';
   }
   return themeColors[currentTheme] || '#fff';
 };
@@ -62,15 +62,21 @@ var updateFuse = function(remaining) {
     return;
   }
   var base = countdownMax || delay || 1;
-  var progress = Math.max(0, Math.min(1, remaining / base));
-  var percent = (progress * 100).toFixed(2) + '%';
+  var progress = 1 - Math.max(0, Math.min(1, remaining / base));
+  var burntWidth = (progress * 100).toFixed(2) + '%';
+  var sparkPercent = (100 - progress * 100).toFixed(2) + '%';
   var timer = document.getElementById('timer');
-  timer.style.setProperty('--fuse-progress', percent);
-  timer.style.setProperty('--spark-position', percent);
+  timer.style.setProperty('--fuse-progress', burntWidth);
+  timer.style.setProperty('--spark-position', sparkPercent);
+};
+
+var formatTime = function(ms) {
+  var safeMs = Math.max(0, ms);
+  return (safeMs / 1000).toFixed(2);
 };
 
 var updateTimerText = function(value) {
-  $('#timer-text').text(value);
+  $('#timer-text').text(formatTime(value));
   updateFuse(value);
   resize();
 };
@@ -101,6 +107,7 @@ var stopTimerRunning = function() {
 var show = function() {
   isShow = !isShow;
   $('body').toggleClass('controls-hidden', !isShow);
+  $('#primary-controls, #preset-controls').attr('aria-hidden', !isShow);
 };
 
 var adjust = function(it, v) {
@@ -182,8 +189,7 @@ var count = function() {
       applyExplosion(true);
     }
   }
-  tm.text(diff + "");
-  updateFuse(diff);
+  updateTimerText(diff);
   return resize();
 };
 
@@ -230,11 +236,11 @@ var toggleBombMode = function() {
   $('body').toggleClass('bomb-mode', isBombMode);
   $('#bomb-toggle').text(isBombMode ? 'Bomb mode ON' : 'Bomb mode');
   refreshTextColor();
-  var currentValue = parseInt($('#timer-text').text(), 10);
+  var currentValue = parseFloat($('#timer-text').text());
   if (isNaN(currentValue)) {
     currentValue = 0;
   }
-  updateFuse(currentValue);
+  updateFuse(currentValue * 1000);
   applyExplosion(false);
   resize();
 };
