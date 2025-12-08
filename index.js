@@ -219,6 +219,10 @@ var resize = function() {
   var container = $('#timer');
   var w = container.width();
   var len = tm.text().length;
+  if (isBombMode) {
+    tm.css('font-size', '20vmin');
+    return;
+  }
   if (len < 3) {
     len = 3;
   }

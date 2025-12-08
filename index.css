@@ -172,9 +172,11 @@ body.controls-hidden #primary-controls #hide {
 body.bomb-mode #timer {
   background: radial-gradient(ellipse at center, #222 0%, #050505 70%);
   color: #ffd43b;
-  max-width: 90vmin;
-  max-height: 90vmin;
-  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  width: min(86vmin, 100%);
+  height: auto;
+  margin: 12px auto;
+  flex: 0 0 auto;
   border-radius: 50%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
 }
