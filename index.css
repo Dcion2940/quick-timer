@@ -26,7 +26,7 @@ body {
 
 #top-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 16px;
   gap: 12px;
@@ -42,18 +42,23 @@ body {
 }
 
 #mode-controls {
-  margin-left: auto;
   gap: 10px;
+  align-items: center;
 }
 
 #mode-controls .control-label {
   margin: 0;
-  color: #fff;
+  color: inherit;
   font-weight: 600;
 }
 
 #mode-controls .form-control {
   width: 180px;
+}
+
+#primary-controls {
+  flex: 1;
+  justify-content: center;
 }
 
 #bomb-toggle {
@@ -102,12 +107,22 @@ body.theme-classic #timer-text {
   color: #fff;
 }
 
+body.theme-sunshine {
+  background: linear-gradient(180deg, #fef7df 0%, #f9df93 45%, #f3b14f 100%);
+  color: #0f2b4c;
+}
+
 body.theme-sunshine #timer {
   background: linear-gradient(180deg, #f8e08e 0%, #f6c953 50%, #f2a93b 100%);
 }
 
 body.theme-sunshine #timer-text {
   color: #0f2b4c;
+}
+
+body.theme-forest {
+  background: linear-gradient(180deg, #0c2b1c 0%, #145f3a 60%, #0c1f14 100%);
+  color: #e7f6df;
 }
 
 body.theme-forest #timer {
@@ -118,12 +133,30 @@ body.theme-forest #timer-text {
   color: #e7f6df;
 }
 
+body.theme-ocean {
+  background: linear-gradient(180deg, #072645 0%, #0b7fa4 45%, #0f3057 100%);
+  color: #e5fbff;
+}
+
 body.theme-ocean #timer {
   background: linear-gradient(180deg, #0c3c78 0%, #0b7fa4 40%, #0f3057 100%);
 }
 
 body.theme-ocean #timer-text {
   color: #e5fbff;
+}
+
+body.controls-hidden #primary-controls .btn,
+body.controls-hidden #preset-controls .btn {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+body.controls-hidden #primary-controls #hide {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Bomb mode */

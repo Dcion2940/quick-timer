@@ -100,16 +100,12 @@ var stopTimerRunning = function() {
 
 var show = function() {
   isShow = !isShow;
-  var state = isShow ? 'auto' : 'none';
-  $('.fbtn').css({
-    opacity: isShow ? '1.0' : '0.1',
-    'pointer-events': state
-  });
+  $('body').toggleClass('controls-hidden', !isShow);
 };
 
 var adjust = function(it, v) {
   if (isBlink) {
-    return;
+    stopTimerRunning();
   }
   if (it === 0) {
     stopTimerRunning();

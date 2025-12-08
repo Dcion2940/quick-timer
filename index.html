@@ -11,15 +11,6 @@
 <body class="theme-classic">
   <div id="app">
     <div id="top-bar">
-      <div class="control-group" id="primary-controls">
-        <a class="btn btn-info fbtn" id="min60" onclick="adjust(-60)">-60</a>
-        <a class="btn btn-info fbtn" id="min10" onclick="adjust(-10)">-10</a>
-        <a class="btn btn-primary" id="toggle" onclick="toggle()">RUN</a>
-        <a class="btn btn-warning" id="reset" onclick="reset()">RESET</a>
-        <a class="btn btn-default" id="hide" onclick="show()">&#xd60;</a>
-        <a class="btn btn-info fbtn" id="add10" onclick="adjust(10)">+10</a>
-        <a class="btn btn-info fbtn" id="add60" onclick="adjust(60)">+60</a>
-      </div>
       <div class="control-group" id="mode-controls">
         <label for="background-selector" class="control-label">Background</label>
         <select id="background-selector" class="form-control" onchange="changeTheme(this.value)">
@@ -29,6 +20,15 @@
           <option value="theme-ocean">Ocean world</option>
         </select>
         <a class="btn btn-danger" id="bomb-toggle" onclick="toggleBombMode()">Bomb mode</a>
+      </div>
+      <div class="control-group" id="primary-controls">
+        <a class="btn btn-info fbtn" id="min60" onclick="adjust(-60)">-60</a>
+        <a class="btn btn-info fbtn" id="min10" onclick="adjust(-10)">-10</a>
+        <a class="btn btn-primary" id="toggle" onclick="toggle()">RUN</a>
+        <a class="btn btn-warning" id="reset" onclick="reset()">RESET</a>
+        <a class="btn btn-default" id="hide" onclick="show()">&#xd60;</a>
+        <a class="btn btn-info fbtn" id="add10" onclick="adjust(10)">+10</a>
+        <a class="btn btn-info fbtn" id="add60" onclick="adjust(60)">+60</a>
       </div>
     </div>
 
