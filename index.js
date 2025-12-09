@@ -68,12 +68,16 @@ var updateFuse = function(remaining) {
   var base = countdownMax || delay || 1;
   var progress = 1 - Math.max(0, Math.min(1, remaining / base));
   var burnLength = fuseLength * progress;
-  var sparkDistance = fuseLength * (1 - progress);
+  var remainingLength = Math.max(0, fuseLength - burnLength);
+  var sparkDistance = burnLength;
   var point = fusePath.getPointAtLength(sparkDistance);
   fuseSpark.style.setProperty('--spark-x', point.x - 11 + 'px');
   fuseSpark.style.setProperty('--spark-y', point.y - 11 + 'px');
+  fusePath.style.strokeDasharray = remainingLength + ' ' + burnLength;
+  fusePath.style.strokeDashoffset = burnLength;
   if (fuseBurn) {
-    fuseBurn.style.setProperty('--burn-length', burnLength + 'px');
+    fuseBurn.style.strokeDasharray = burnLength + ' ' + remainingLength;
+    fuseBurn.style.strokeDashoffset = 0;
   }
 };
 

@@ -173,9 +173,9 @@ body.bomb-mode #timer {
   background: radial-gradient(ellipse at center, #222 0%, #050505 70%);
   color: #ffd43b;
   aspect-ratio: 1 / 1;
-  width: min(72vmin, 92%);
+  width: min(68vmin, 92%);
   height: auto;
-  margin: 12px auto;
+  margin: 64px auto 20px;
   flex: 0 0 auto;
   border-radius: 50%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
@@ -207,14 +207,14 @@ body:not(.bomb-mode) #explosion {
 
 #bomb-fuse {
   position: absolute;
-  top: -26%;
-  right: -120px;
+  top: -18%;
+  right: -96px;
   width: 420px;
-  height: 160px;
+  height: 170px;
   pointer-events: none;
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.45));
   overflow: visible;
-  transform: rotate(-12deg);
+  transform: rotate(-9deg);
 }
 
 #bomb-fuse svg {
