@@ -66,18 +66,18 @@ var updateFuse = function(remaining) {
     return;
   }
   var base = countdownMax || delay || 1;
-  var progress = 1 - Math.max(0, Math.min(1, remaining / base));
-  var burnLength = fuseLength * progress;
-  var remainingLength = Math.max(0, fuseLength - burnLength);
-  var sparkDistance = burnLength;
+  var safeRemaining = Math.max(0, Math.min(base, remaining));
+  var progress = 1 - safeRemaining / base;
+  var burnLength = Math.max(0, Math.min(fuseLength, fuseLength * progress));
+  var sparkDistance = Math.max(0, Math.min(fuseLength, burnLength));
   var point = fusePath.getPointAtLength(sparkDistance);
   fuseSpark.style.setProperty('--spark-x', point.x - 11 + 'px');
   fuseSpark.style.setProperty('--spark-y', point.y - 11 + 'px');
-  fusePath.style.strokeDasharray = remainingLength + ' ' + burnLength;
+  fusePath.style.strokeDasharray = fuseLength + ' ' + fuseLength;
   fusePath.style.strokeDashoffset = burnLength;
   if (fuseBurn) {
-    fuseBurn.style.strokeDasharray = burnLength + ' ' + remainingLength;
-    fuseBurn.style.strokeDashoffset = 0;
+    fuseBurn.style.strokeDasharray = fuseLength + ' ' + fuseLength;
+    fuseBurn.style.strokeDashoffset = Math.max(0, fuseLength - burnLength);
   }
 };
 
@@ -252,11 +252,15 @@ var initFuseGraphics = function() {
   fuseSpark = document.querySelector('#bomb-fuse .fuse-spark');
   if (fusePath) {
     fuseLength = fusePath.getTotalLength();
+    fusePath.style.strokeDasharray = fuseLength + ' ' + fuseLength;
+    fusePath.style.strokeDashoffset = 0;
     var fuseRoot = document.getElementById('bomb-fuse');
     if (fuseRoot) {
       fuseRoot.style.setProperty('--fuse-length', fuseLength + 'px');
     }
     if (fuseBurn) {
+      fuseBurn.style.strokeDasharray = fuseLength + ' ' + fuseLength;
+      fuseBurn.style.strokeDashoffset = fuseLength;
       fuseBurn.style.setProperty('--fuse-length', fuseLength + 'px');
     }
   }
