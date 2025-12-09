@@ -36,11 +36,18 @@
       <div id="bomb-shine" aria-hidden="true"></div>
       <div id="bomb-fuse" aria-hidden="true">
         <svg viewBox="0 0 420 160" preserveAspectRatio="xMinYMin meet">
+          <defs>
+            <radialGradient id="spark-gradient" cx="30%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fff9c4" />
+              <stop offset="60%" stop-color="#ff9800" />
+              <stop offset="100%" stop-color="#d84315" />
+            </radialGradient>
+          </defs>
           <path id="fuse-shadow" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" />
           <path id="fuse-path" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" />
           <path id="fuse-burn" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" />
+          <circle id="fuse-spark" class="fuse-spark" r="11" cx="400" cy="26" />
         </svg>
-        <div class="fuse-spark"></div>
       </div>
       <div id="timer-text">????</div>
       <div id="explosion" aria-hidden="true"></div>

@@ -71,16 +71,9 @@ var updateFuse = function(remaining) {
   var burnLength = Math.max(0, Math.min(fuseLength, fuseLength * progress));
   var sparkDistance = Math.max(0, Math.min(fuseLength, burnLength));
   var point = fusePath.getPointAtLength(sparkDistance);
-  var fuseRoot = document.getElementById('bomb-fuse');
-  var svg = fusePath.ownerSVGElement;
-  if (fuseRoot && svg && typeof svg.createSVGPoint === 'function' && typeof fusePath.getScreenCTM === 'function') {
-    var svgPoint = svg.createSVGPoint();
-    svgPoint.x = point.x;
-    svgPoint.y = point.y;
-    var screenPoint = svgPoint.matrixTransform(fusePath.getScreenCTM());
-    var containerRect = fuseRoot.getBoundingClientRect();
-    fuseSpark.style.setProperty('--spark-x', screenPoint.x - containerRect.left - 11 + 'px');
-    fuseSpark.style.setProperty('--spark-y', screenPoint.y - containerRect.top - 11 + 'px');
+  if (fuseSpark) {
+    fuseSpark.setAttribute('cx', point.x);
+    fuseSpark.setAttribute('cy', point.y);
   }
   var dashPair = fuseLength + ' ' + fuseLength;
   fusePath.style.strokeDasharray = dashPair;
@@ -260,7 +253,7 @@ var changeTheme = function(theme) {
 var initFuseGraphics = function() {
   fusePath = document.getElementById('fuse-path');
   fuseBurn = document.getElementById('fuse-burn');
-  fuseSpark = document.querySelector('#bomb-fuse .fuse-spark');
+  fuseSpark = document.getElementById('fuse-spark');
   if (fusePath) {
     fuseLength = fusePath.getTotalLength();
     fusePath.style.strokeDasharray = fuseLength + ' ' + fuseLength;

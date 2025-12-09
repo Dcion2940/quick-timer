@@ -251,20 +251,17 @@ body:not(.bomb-mode) #explosion {
 }
 
 #bomb-fuse .fuse-spark {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff9c4 0%, #ff9800 60%, #d84315 100%);
-  box-shadow: 0 0 16px rgba(255, 196, 0, 0.9);
-  animation: pulse 0.6s infinite ease-in-out;
-  transform: translate(var(--spark-x, 0px), var(--spark-y, 0px));
+  fill: url(#spark-gradient);
+  filter: drop-shadow(0 0 16px rgba(255, 196, 0, 0.9));
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: sparkPulse 0.6s infinite ease-in-out;
 }
 
-@keyframes pulse {
-  0% { transform: translate(var(--spark-x, 0px), var(--spark-y, 0px)) scale(0.9); }
-  50% { transform: translate(var(--spark-x, 0px), var(--spark-y, 0px)) scale(1.1); }
-  100% { transform: translate(var(--spark-x, 0px), var(--spark-y, 0px)) scale(0.9); }
+@keyframes sparkPulse {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(0.9); }
 }
 
 #explosion {
