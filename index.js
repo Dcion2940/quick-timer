@@ -14,6 +14,10 @@ var audioRemind = null;
 var audioEnd = null;
 var isBombMode = false;
 var currentTheme = 'theme-classic';
+var fusePath = null;
+var fuseBurn = null;
+var fuseSpark = null;
+var fuseLength = 0;
 
 var themeColors = {
   'theme-classic': '#fff',
@@ -58,16 +62,19 @@ var stopAllSounds = function() {
 };
 
 var updateFuse = function(remaining) {
-  if (!isBombMode) {
+  if (!isBombMode || !fusePath || !fuseSpark) {
     return;
   }
   var base = countdownMax || delay || 1;
   var progress = 1 - Math.max(0, Math.min(1, remaining / base));
-  var burntWidth = (progress * 100).toFixed(2) + '%';
-  var sparkPercent = (100 - progress * 100).toFixed(2) + '%';
-  var timer = document.getElementById('timer');
-  timer.style.setProperty('--fuse-progress', burntWidth);
-  timer.style.setProperty('--spark-position', sparkPercent);
+  var burnLength = fuseLength * progress;
+  var sparkDistance = fuseLength * (1 - progress);
+  var point = fusePath.getPointAtLength(sparkDistance);
+  fuseSpark.style.setProperty('--spark-x', point.x - 11 + 'px');
+  fuseSpark.style.setProperty('--spark-y', point.y - 11 + 'px');
+  if (fuseBurn) {
+    fuseBurn.style.setProperty('--burn-length', burnLength + 'px');
+  }
 };
 
 var formatTime = function(ms) {
@@ -235,11 +242,30 @@ var changeTheme = function(theme) {
   refreshTextColor();
 };
 
+var initFuseGraphics = function() {
+  fusePath = document.getElementById('fuse-path');
+  fuseBurn = document.getElementById('fuse-burn');
+  fuseSpark = document.querySelector('#bomb-fuse .fuse-spark');
+  if (fusePath) {
+    fuseLength = fusePath.getTotalLength();
+    var fuseRoot = document.getElementById('bomb-fuse');
+    if (fuseRoot) {
+      fuseRoot.style.setProperty('--fuse-length', fuseLength + 'px');
+    }
+    if (fuseBurn) {
+      fuseBurn.style.setProperty('--fuse-length', fuseLength + 'px');
+    }
+  }
+};
+
 var toggleBombMode = function() {
   isBombMode = !isBombMode;
   $('body').toggleClass('bomb-mode', isBombMode);
   $('#bomb-toggle').text(isBombMode ? 'Bomb mode ON' : 'Bomb mode');
   refreshTextColor();
+  if (!fusePath) {
+    initFuseGraphics();
+  }
   var currentValue = parseFloat($('#timer-text').text());
   if (isNaN(currentValue)) {
     currentValue = 0;
@@ -253,6 +279,7 @@ window.onload = function() {
   updateTimerText(delay);
   audioRemind = newAudio('audio/smb_warning.mp3');
   audioEnd = newAudio('audio/smb_mariodie.mp3');
+  initFuseGraphics();
 };
 
 window.onresize = function() {

@@ -35,9 +35,11 @@
     <div id="timer" aria-live="polite">
       <div id="bomb-shine" aria-hidden="true"></div>
       <div id="bomb-fuse" aria-hidden="true">
-        <div class="fuse-line">
-          <div class="fuse-progress"></div>
-        </div>
+        <svg viewBox="0 0 420 160" preserveAspectRatio="xMinYMin meet">
+          <path id="fuse-shadow" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" />
+          <path id="fuse-path" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" pathLength="1" />
+          <path id="fuse-burn" d="M400 26 C 360 50 330 86 280 90 S 200 126 150 114 S 86 72 46 86" pathLength="1" />
+        </svg>
         <div class="fuse-spark"></div>
       </div>
       <div id="timer-text">????</div>
