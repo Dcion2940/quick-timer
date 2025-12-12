@@ -1,10 +1,10 @@
 quick-timer
 ===========
 
+
 let's count down!
 
-![alt screenshot](https://raw.github.com/zbryikt/quick-timer/master/screenshot.png)
-
+<img width="1511" height="806" alt="Screenshot 2025-12-12 at 4 27 10 PM" src="https://github.com/user-attachments/assets/d618dabe-7c23-411c-873f-897fcb5c5067" />
 
 Demo
 ----------
