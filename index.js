@@ -72,8 +72,7 @@ var updateFuse = function(remaining) {
   var sparkDistance = Math.max(0, Math.min(fuseLength, burnLength));
   var point = fusePath.getPointAtLength(sparkDistance);
   if (fuseSpark) {
-    fuseSpark.setAttribute('cx', point.x);
-    fuseSpark.setAttribute('cy', point.y);
+    fuseSpark.setAttribute('transform', 'translate(' + point.x + ' ' + point.y + ')');
   }
   var dashPair = fuseLength + ' ' + fuseLength;
   fusePath.style.strokeDasharray = dashPair;
