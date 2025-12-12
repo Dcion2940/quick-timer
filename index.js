@@ -20,7 +20,7 @@ var fuseSpark = null;
 var fuseLength = 0;
 
 var themeColors = {
-  'theme-classic': '#fff',
+  'theme-classic': '#111',
   'theme-sunshine': '#0f2b4c',
   'theme-forest': '#e7f6df',
   'theme-ocean': '#e5fbff'
